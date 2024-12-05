@@ -1,0 +1,45 @@
+.mainCont {
+    background-color: #ff5200;
+    padding: 2vh 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    .title {
+      font-size: 2vh;
+      font-family: "Gilroy", sans-serif;
+      color: whitesmoke;
+    }
+  
+    .searchBar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 0.5vh 1vw;
+      width: 30vw;
+  
+      .inputBox {
+        width: 90%;
+        border: none;
+        outline: none;
+        font-size: 1.8vh;
+      }
+  
+      .searchIcon {
+        width: 10%;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+  
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+  
