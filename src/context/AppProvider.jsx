@@ -3,11 +3,11 @@ import { AppContext } from "./AppContext";
 import PropTypes from "prop-types";
 
 export const AppProvider = ({children}) => {
-    const [categories , setCategories] = useState([])
+    const [selectedCategory , setSelectedCategory] = useState("Chicken")
 
     return(
         <AppContext.Provider value={{
-            categories , setCategories
+            selectedCategory , setSelectedCategory
         }}>
             {children}
         </AppContext.Provider>
@@ -15,5 +15,5 @@ export const AppProvider = ({children}) => {
 }
 
 AppProvider.propTypes = {
-    children: PropTypes.node.isRequired, // Validate the children prop
+    children: PropTypes.node.isRequired
   };
