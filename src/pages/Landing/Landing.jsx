@@ -10,7 +10,7 @@ import Pagination from "../../components/Pagination/Pagination";
 const Landing = () => {
   const { mealList, setMealList } = useContext(AppContext);
 
-  const { data, loading, error } = useFetch(
+  const { data, loading } = useFetch(
     `https://www.themealdb.com/api/json/v1/1/filter.php?a=indian`
   );
 
@@ -39,6 +39,11 @@ const Landing = () => {
   const handlePaginate = (pageNumber) => {
     if (pageNumber > 0 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
+      // Scroll to the top
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // For a smooth scrolling effect
+      });
     }
   };
 
