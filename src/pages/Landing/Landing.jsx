@@ -1,7 +1,10 @@
+import Categories from "../../components/Categories/Categories"
 
 const Landing = () => {
   return (
-    <div>Landing</div>
+    <div>
+        <Categories/>
+    </div>
   )
 }
 
