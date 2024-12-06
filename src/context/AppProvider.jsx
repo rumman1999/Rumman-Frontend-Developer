@@ -4,10 +4,16 @@ import PropTypes from "prop-types";
 
 export const AppProvider = ({children}) => {
     const [selectedCategory , setSelectedCategory] = useState("Chicken")
+    const [selectedMeal , setSelectedMeal] = useState("")
+    const [mealList , setMealList] = useState([])
+
+    
 
     return(
         <AppContext.Provider value={{
-            selectedCategory , setSelectedCategory
+            selectedCategory , setSelectedCategory,
+            selectedMeal , setSelectedMeal,
+            mealList , setMealList
         }}>
             {children}
         </AppContext.Provider>
