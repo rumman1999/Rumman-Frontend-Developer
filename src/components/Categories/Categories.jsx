@@ -15,7 +15,7 @@ const Categories = () => {
 
   if (loading)
     return (
-      <div className="max-w-[1000px] m-auto w-[100%]">
+      <div className="w-[100%]">
         <h2 className="text-2xl font-bold mb-6">Meal Categories</h2>
         <CategoryCardSkeleton />
       </div>
@@ -32,7 +32,7 @@ const Categories = () => {
   };
 
   return (
-    <div className="p-2 max-w-[1000px] m-auto">
+    <div className="p-2 ">
       <div className="flex items-center justify-between">
         <div className="text-2xl font-medium mb-6">Meal Categories</div>
         <button

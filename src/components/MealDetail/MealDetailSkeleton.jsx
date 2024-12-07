@@ -2,7 +2,7 @@
 
 const MealDetailSkeleton = () => {
     return (
-      <div className="meal-detail bg-gray-200 p-6 animate-pulse rounded-lg shadow-lg max-w-[1000px] m-auto w-[100%]">
+      <div className="meal-detail bg-gray-200 p-6 animate-pulse rounded-lg shadow-lg  w-[100%]">
         <div className="w-full h-56 bg-gray-300 rounded-lg"></div>
         <div className="mt-4 h-6 bg-gray-300 rounded w-3/4 mx-auto"></div>
         <div className="mt-4 space-y-3">
