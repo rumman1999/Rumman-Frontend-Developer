@@ -42,6 +42,7 @@ const FilterMenu = () => {
 
   const toggleFilterMenu = () => {
     setFilterMenuOpen(!isFilterMenuOpen);
+    setFetchVal(selectedItem)
   };
 
   const toggleSortMenu = () => {
