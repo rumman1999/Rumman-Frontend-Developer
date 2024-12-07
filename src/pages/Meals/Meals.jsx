@@ -17,7 +17,7 @@ const Meals = () => {
 
   if (loading)
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-[1000px] m-auto w-[100%]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6  w-[100%]">
         {Array.from({ length: 5 }).map((_, index) => (
           <MealCardSkeleton key={index} />
         ))}
@@ -27,7 +27,7 @@ const Meals = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="max-w-[1000px] m-auto w-[100%]">
+    <div className=" w-[100%]">
       <div className="flex justify-between items-center mb-6 p-2">
         <h2 className="text-2xl font-bold">{`Meals for ${selectedCategory}`}</h2>
         <button

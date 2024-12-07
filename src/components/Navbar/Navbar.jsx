@@ -21,9 +21,9 @@ const Navbar = () => {
 
   useEffect(() => {
     if (debouncedSearchInput) {
-      const filteredList = mealList?.meals?.filter((meal) =>
+      const filteredList = mealList?.filter((meal) =>
         meal?.strMeal?.toLowerCase().includes(debouncedSearchInput.toLowerCase())
-      );
+    );
       setFilteredMenu(filteredList);
     } else {
       setFilteredMenu(mealList);
@@ -31,7 +31,7 @@ const Navbar = () => {
   }, [debouncedSearchInput, mealList, setFilteredMenu]);
 
   return (
-    <div className="bg-[#ff5200] shadow-md px-4 sm:px-8 py-4 flex flex-wrap items-center justify-between text-white max-w-[1000px] m-auto w-[100%]">
+    <div className="bg-[#ff5200] shadow-md px-4 sm:px-8 py-4 flex flex-wrap items-center justify-between text-white m-auto w-[100%]">
       <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
       <img src="https://res.cloudinary.com/dutdah0l9/image/upload/v1720058694/Swiggy_logo_bml6he.png" alt="" />
       </div>

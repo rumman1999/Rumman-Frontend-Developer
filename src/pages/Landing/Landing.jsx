@@ -40,7 +40,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="max-w-[1000px] m-auto">
+    <div className="">
       <FilterMenu />
       <div>
         <div className="min-h-[60vh]">

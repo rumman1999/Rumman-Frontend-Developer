@@ -2,7 +2,7 @@ import { FaLinkedin, FaGithub, FaEnvelope, FaPhoneAlt, FaGlobe } from "react-ico
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-6 max-w-[1000px] w-full m-auto">
+    <footer className="bg-gray-800 text-white py-6 w-full m-auto">
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-2">
           <img
