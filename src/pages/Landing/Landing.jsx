@@ -20,7 +20,6 @@ const Landing = () => {
 
   useEffect(() => {
     if (filteredMenu) {
-      console.log("Landing", filteredMenu);
       const total = calculateTotalPages(filteredMenu.length, itemsPerPage);
       setTotalPages(total);
 

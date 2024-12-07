@@ -13,10 +13,12 @@ const FilterMenu = () => {
   const [isSortMenuOpen, setSortMenuOpen] = useState(false);
 
   const [selectedItem, setSelectedItem] = useState("Indian");
+  const [fetchVal , setFetchVal] = useState("Indian")
   const [title, setTitle] = useState("Indian");
   const [sortOption, setSortOption] = useState(null);
+  
 
-  const { data: mealData } = useFetchMeals(selectedItem); 
+  const { data: mealData } = useFetchMeals(fetchVal); 
   const { areas, loading, error } = useFetchAreas(); 
   
   useEffect(() => {
@@ -44,6 +46,7 @@ const FilterMenu = () => {
 
   const toggleSortMenu = () => {
     setSortMenuOpen(!isSortMenuOpen);
+    setFetchVal(selectedItem)
   };
 
   const applySorting = () => {
