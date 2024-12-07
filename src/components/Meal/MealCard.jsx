@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 
-import { useContext } from "react";
-import { useNavigate } from "react-router";
+import { useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
+import MealDetail from "../../pages/MealDetail/MealDetail";
 
 const MealCard = ({ meal }) => {
-  const navigate = useNavigate();
   const { setSelectedMeal } = useContext(AppContext);
+  const [model , setModel] = useState(false)
 
   // Randomly generate a rating between 1.5 and 4.8
   const rating = (Math.random() * (4.8 - 1.5) + 1.5).toFixed(1);
@@ -18,15 +18,16 @@ const MealCard = ({ meal }) => {
     return "text-green-500"; // Good rating
   };
 
-  const handleNavigate = () => {
+  const handleOpenModel = () => {
     setSelectedMeal(meal?.idMeal);
-    navigate(`/meal-detail/${meal?.idMeal}`);
+    setModel(true)
   };
 
   return (
+    <>
     <div
       className="meal-card bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition duration-300 ease-in-out cursor-pointer"
-      onClick={handleNavigate}
+      onClick={handleOpenModel}
     >
       <img
         src={meal?.strMealThumb}
@@ -44,6 +45,10 @@ const MealCard = ({ meal }) => {
         Rating {rating} ★
       </div>
     </div>
+    {
+        model && <MealDetail setModel={setModel}/>
+    }
+    </>
   );
 };
 

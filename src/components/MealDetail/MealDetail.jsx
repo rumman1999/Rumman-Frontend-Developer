@@ -1,10 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; 
 import MealDetailSkeleton from "./MealDetailSkeleton"; 
 
-const MealDetails = () => {
-  const navigate = useNavigate(); 
-  const { idMeal } = useParams(); 
+const MealDetails = ({selectedMeal}) => {
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,7 +11,7 @@ const MealDetails = () => {
     const fetchMeal = async () => {
       try {
         const response = await fetch(
-          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${selectedMeal}`
         );
         const data = await response.json();
         setMeal(data.meals[0]);
@@ -25,28 +23,20 @@ const MealDetails = () => {
       }
     };
     fetchMeal();
-  }, [idMeal]);
+  }, [selectedMeal]);
 
   if (loading) return <MealDetailSkeleton />; 
   if (error) return <p>{error}</p>; 
 
-  const handleBack = () => {
-    navigate(-1); 
-  };
+  
 
   return (
-    <div>
+    <div className="h-[80vh] overflow-y-auto">
       <div className="flex justify-between items-center mb-6 p-2">
         <h2 className="text-xl font-semibold">{`Meal: ${meal.strMeal}`}</h2>
-        <button
-          onClick={handleBack}
-          className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition duration-200"
-        >
-          Back
-        </button>
+      
       </div>
 
-      {/* Meal Details */}
       <div className="meal-detail-container max-w-4xl mx-auto p-6">
         <div className="meal-detail bg-white p-6 rounded-lg shadow-lg">
           <img

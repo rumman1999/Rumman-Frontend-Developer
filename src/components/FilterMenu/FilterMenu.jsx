@@ -79,7 +79,7 @@ const FilterMenu = () => {
   };
 
   return (
-    <div className="flex flex-wrap gap-3 p-4 bg-stone-100">
+    <div className="flex flex-wrap gap-3 p-4 bg-[#FF5200]">
       {/* Filter Menu */}
       <div
         className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-300 shadow-sm hover:shadow-md cursor-pointer text-sm relative"
