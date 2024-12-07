@@ -11,17 +11,14 @@ const Navbar = () => {
     setSearchInput(e.target.value);
   };
 
-
-  // Debounce the search input
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearchInput(searchInput.trim());
-    }, 300); // Debounce delay (in ms)
+    }, 300);
 
-    return () => clearTimeout(timer); // Clear timeout on component unmount or input change
+    return () => clearTimeout(timer);
   }, [searchInput]);
 
-  // Filter mealList when the debounced value changes
   useEffect(() => {
     if (debouncedSearchInput) {
       const filteredList = mealList?.meals?.filter((meal) =>
@@ -29,7 +26,7 @@ const Navbar = () => {
       );
       setFilteredMenu(filteredList);
     } else {
-      setFilteredMenu(mealList); // Reset to full list when input is cleared
+      setFilteredMenu(mealList);
     }
   }, [debouncedSearchInput, mealList, setFilteredMenu]);
 

@@ -4,7 +4,6 @@ const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white py-6">
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Left Section */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-2">
           <img
             className="h-8"
@@ -14,10 +13,7 @@ const Footer = () => {
           <p className="text-lg font-semibold">Rumman</p>
           <p className="text-sm text-gray-400">© 2024 Rumman. All rights reserved.</p>
         </div>
-
-        {/* Right Section */}
         <div className="flex flex-col items-center md:items-start space-y-3 text-sm">
-          {/* LinkedIn */}
           <a
             href="https://www.linkedin.com/in/rummanhase"
             target="_blank"
@@ -26,14 +22,12 @@ const Footer = () => {
           >
             <FaLinkedin className="text-blue-600" /> www.linkedin.com/in/rummanhase
           </a>
-          {/* Email */}
           <a
             href="mailto:rummanhase@gmail.com"
             className="flex items-center gap-2 hover:underline"
           >
             <FaEnvelope className="text-red-500" /> rummanhase@gmail.com
           </a>
-          {/* GitHub */}
           <a
             href="https://github.com/rumman1999"
             target="_blank"
@@ -42,14 +36,12 @@ const Footer = () => {
           >
             <FaGithub /> github.com/rumman1999
           </a>
-          {/* Phone */}
           <a
             href="tel:+917753955595"
             className="flex items-center gap-2 hover:underline"
           >
             <FaPhoneAlt className="text-green-500" /> 7753955595
           </a>
-          {/* Portfolio */}
           <a
             href="https://rummann.netlify.app/"
             target="_blank"
