@@ -8,17 +8,18 @@ import { calculateTotalPages, paginateData } from "../../helpers/paginationHelpe
 import Pagination from "../../components/Pagination/Pagination";
 
 const Landing = () => {
-  const { mealList, setMealList } = useContext(AppContext);
+  const {  setMealList , filteredMenu , setFilteredMenu} = useContext(AppContext);
 
   const { data, loading } = useFetch(
     `https://www.themealdb.com/api/json/v1/1/filter.php?a=indian`
   );
 
   useEffect(() => {
-    if (data) {
-      setMealList(data);
+    if (data?.meals) {
+      setMealList(data?.meals);
+      setFilteredMenu(data?.meals)
     }
-  }, [data]);
+  }, [data?.meals]);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,22 +28,21 @@ const Landing = () => {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    if (mealList?.meals) {
-      const total = calculateTotalPages(mealList.meals.length, itemsPerPage);
+    if (filteredMenu) {
+      const total = calculateTotalPages(filteredMenu.length, itemsPerPage);
       setTotalPages(total);
 
-      const meals = paginateData(mealList.meals, currentPage, itemsPerPage);
+      const meals = paginateData(filteredMenu, currentPage, itemsPerPage);
       setCurrentMeals(meals);
     }
-  }, [mealList, currentPage]);
+  }, [filteredMenu, currentPage]);
 
   const handlePaginate = (pageNumber) => {
     if (pageNumber > 0 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
-      // Scroll to the top
       window.scrollTo({
         top: 0,
-        behavior: "smooth", // For a smooth scrolling effect
+        behavior: "smooth",
       });
     }
   };
@@ -51,7 +51,8 @@ const Landing = () => {
     <div className="max-w-[1000px] m-auto">
       <FilterMenu />
       <div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+       <div className="min-h-[60vh]">
+       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {loading
             ? Array.from({ length: 5 }).map((_, index) => (
                 <MealCardSkeleton key={index} />
@@ -60,9 +61,10 @@ const Landing = () => {
                 <MealCard key={meal.idMeal} meal={meal} />
               ))}
         </div>
+       </div>
 
         {/* Pagination */}
-        {mealList?.meals?.length > 0 && !loading && (
+        {filteredMenu?.length > 0 && !loading && (
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}

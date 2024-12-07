@@ -1,28 +1,42 @@
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
+import { AppContext } from "../../context/AppContext";
 
 const Navbar = () => {
+  const { mealList, setFilteredMenu } = useContext(AppContext);
   const [searchInput, setSearchInput] = useState("");
+  const [debouncedSearchInput, setDebouncedSearchInput] = useState("");
 
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
   };
 
-  const handleSearch = () => {
-    console.log("Search for the Input: ", searchInput);
-  };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
+  // Debounce the search input
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchInput(searchInput.trim());
+    }, 300); // Debounce delay (in ms)
+
+    return () => clearTimeout(timer); // Clear timeout on component unmount or input change
+  }, [searchInput]);
+
+  // Filter mealList when the debounced value changes
+  useEffect(() => {
+    if (debouncedSearchInput) {
+      const filteredList = mealList?.meals?.filter((meal) =>
+        meal?.strMeal?.toLowerCase().includes(debouncedSearchInput.toLowerCase())
+      );
+      setFilteredMenu(filteredList);
+    } else {
+      setFilteredMenu(mealList); // Reset to full list when input is cleared
     }
-  };
+  }, [debouncedSearchInput, mealList, setFilteredMenu]);
 
   return (
     <div className="bg-[#ff5200] shadow-md px-4 sm:px-8 py-4 flex flex-wrap items-center justify-between text-white max-w-[1000px] m-auto w-[100%]">
-      
       <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
-        Food Menu WebPage
+      <img src="https://res.cloudinary.com/dutdah0l9/image/upload/v1720058694/Swiggy_logo_bml6he.png" alt="" />
       </div>
 
       <div className="relative flex items-center w-full sm:w-auto mt-3 sm:mt-0">
@@ -31,12 +45,8 @@ const Navbar = () => {
           placeholder="Search for restaurants and food"
           value={searchInput}
           onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
         />
-        <span
-          className="absolute right-3 text-gray-500 cursor-pointer"
-          onClick={handleSearch}
-        >
+        <span className="absolute right-3 text-gray-500 cursor-pointer">
           <CiSearch className="w-6 h-6" />
         </span>
       </div>

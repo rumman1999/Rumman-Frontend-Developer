@@ -6,6 +6,7 @@ export const AppProvider = ({children}) => {
     const [selectedCategory , setSelectedCategory] = useState("Chicken")
     const [selectedMeal , setSelectedMeal] = useState("")
     const [mealList , setMealList] = useState([])
+    const [filteredMenu , setFilteredMenu] = useState([])
 
     
 
@@ -13,7 +14,8 @@ export const AppProvider = ({children}) => {
         <AppContext.Provider value={{
             selectedCategory , setSelectedCategory,
             selectedMeal , setSelectedMeal,
-            mealList , setMealList
+            mealList , setMealList,
+            filteredMenu , setFilteredMenu
         }}>
             {children}
         </AppContext.Provider>

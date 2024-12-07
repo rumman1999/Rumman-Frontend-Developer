@@ -4,12 +4,13 @@ import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 
 const FilterMenu = () => {
-  const { setMealList, mealList } = useContext(AppContext);
+  const { setMealList, mealList , setFilteredMenu} = useContext(AppContext);
   const [isFilterMenuOpen, setFilterMenuOpen] = useState(false);
   const [isSortMenuOpen, setSortMenuOpen] = useState(false);
 
   const [menuData, setMenuData] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState("Indian");
+  const [title , setTitle] = useState("Indian")
   const [sortOption, setSortOption] = useState(null);
 
   const handleSelection = (item, e) => {
@@ -39,7 +40,7 @@ const FilterMenu = () => {
     );
 
     Area = Area.map((item) => item.strArea);
-
+    setTitle(selectedItem)
     setMenuData(Area);
   };
 
@@ -60,27 +61,32 @@ const FilterMenu = () => {
 
     if (url) {
       const meals = await fetchMenuList(url);
-      setMealList({ meals });
+      setMealList( meals );
+      setFilteredMenu(meals)
     }
     toggleFilterMenu();
   };
 
   const applySorting = () => {
-    if (sortOption && mealList?.meals) {
-      const sortedMeals = [...mealList.meals].sort((a, b) => {
+    if (sortOption && mealList) {
+      // Create a shallow copy of mealList to avoid mutating the original state
+      const sortedMeals = [...mealList].sort((a, b) => {
         const mealA = a.strMeal.toLowerCase();
         const mealB = b.strMeal.toLowerCase();
         return sortOption === "asc" ? mealA.localeCompare(mealB) : mealB.localeCompare(mealA);
       });
-
-      setMealList({ meals: sortedMeals });
+  
+      // Update the filteredMenu state with the sorted meals
+      setFilteredMenu(sortedMeals);
     }
     toggleSortMenu();
   };
+  
 
   return (
+      <>
+      <p className="text-white bg-[#FF5200] px-4">Restaurants and Menu Lists Area {title}</p>
     <div className="flex flex-wrap gap-3 p-4 bg-[#FF5200]">
-      {/* Filter Menu */}
       <div
         className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-300 shadow-sm hover:shadow-md cursor-pointer text-sm relative"
         onClick={toggleFilterMenu}
@@ -209,6 +215,7 @@ const FilterMenu = () => {
         <span>Less than Rs 300</span>
       </div>
     </div>
+      </>
   );
 };
 
