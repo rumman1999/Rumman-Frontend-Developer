@@ -8,14 +8,12 @@ const MealCard = ({ meal }) => {
   const { setSelectedMeal } = useContext(AppContext);
   const [model , setModel] = useState(false)
 
-  // Randomly generate a rating between 1.5 and 4.8
   const rating = (Math.random() * (4.8 - 1.5) + 1.5).toFixed(1);
 
-  // Determine rating color based on value
   const getRatingColor = (rating) => {
-    if (rating < 2.5) return "text-red-500"; // Low rating
-    if (rating < 3.5) return "text-yellow-500"; // Medium rating
-    return "text-green-500"; // Good rating
+    if (rating < 2.5) return "text-red-500";
+    if (rating < 3.5) return "text-yellow-500";
+    return "text-green-500"; 
   };
 
   const handleOpenModel = () => {
@@ -36,7 +34,6 @@ const MealCard = ({ meal }) => {
       />
       <div className="mt-4 text-sm font-normal text-center">{meal?.strMeal}</div>
 
-      {/* Rating */}
       <div
         className={`mt-2 text-sm font-bold text-center ${getRatingColor(
           rating

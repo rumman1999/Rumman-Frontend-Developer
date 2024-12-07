@@ -1,20 +1,17 @@
 import { useState } from "react";
-import useFetch from "../../hooks/customHooks";
+import { useFetchCategories } from "../../hooks/useFetchCategories"; 
 import CategoryCard from "./CategoryCard";
-import Pagination from "../../components/Pagination/Pagination"; // Import your reusable pagination component
-import {
-  paginateData,
-  calculateTotalPages,
-} from "../../helpers/paginationHelper"; // Import helper functions
+import Pagination from "../../components/Pagination/Pagination";
+import { paginateData, calculateTotalPages } from "../../helpers/paginationHelper";
 import CategoryCardSkeleton from "./CategoryCardSkeleton";
+import { useNavigate } from "react-router";
 
 const Categories = () => {
-  const { data, loading, error } = useFetch(
-    "https://www.themealdb.com/api/json/v1/1/categories.php"
-  );
+  const navigate = useNavigate();
+  const { categories, loading, error } = useFetchCategories(); 
 
-  const [currentPage, setCurrentPage] = useState(1); // Tracks the current page
-  const itemsPerPage = 5; // Number of cards per page
+  const [currentPage, setCurrentPage] = useState(1); 
+  const itemsPerPage = 5;
 
   if (loading)
     return (
@@ -25,20 +22,26 @@ const Categories = () => {
     );
   if (error) return <p>{error}</p>;
 
-  // Paginated data
-  const currentCategories = paginateData(
-    data.categories,
-    currentPage,
-    itemsPerPage
-  );
-  const totalPages = calculateTotalPages(data.categories.length, itemsPerPage);
+  const currentCategories = paginateData(categories, currentPage, itemsPerPage);
+  const totalPages = calculateTotalPages(categories.length, itemsPerPage);
 
-  // Update the page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const handleBack = () => {
+    navigate("/");
+  };
+
   return (
-    <div className="p-2">
-      <h2 className="text-2xl font-medium mb-6">Meal Categories</h2>
+    <div className="p-2 max-w-[1000px] m-auto">
+      <div className="flex items-center justify-between">
+        <div className="text-2xl font-medium mb-6">Meal Categories</div>
+        <button
+          onClick={handleBack}
+          className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition duration-200"
+        >
+          Back
+        </button>
+      </div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

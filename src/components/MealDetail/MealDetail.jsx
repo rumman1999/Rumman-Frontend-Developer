@@ -1,40 +1,17 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useFetchMealDetail } from "../../hooks/useFetchMealDetail";
 import MealDetailSkeleton from "./MealDetailSkeleton"; 
 
-const MealDetails = ({selectedMeal}) => {
-  const [meal, setMeal] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const MealDetails = ({ selectedMeal }) => {
+  const { meal, loading, error } = useFetchMealDetail(selectedMeal); 
 
-  useEffect(() => {
-    const fetchMeal = async () => {
-      try {
-        const response = await fetch(
-          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${selectedMeal}`
-        );
-        const data = await response.json();
-        setMeal(data.meals[0]);
-      } catch (err) {
-        console.error(err)
-        setError("Failed to fetch meal details.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMeal();
-  }, [selectedMeal]);
-
-  if (loading) return <MealDetailSkeleton />; 
-  if (error) return <p>{error}</p>; 
-
-  
+  if (loading) return <MealDetailSkeleton />;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="h-[80vh] overflow-y-auto">
       <div className="flex justify-between items-center mb-6 p-2">
         <h2 className="text-xl font-semibold">{`Meal: ${meal.strMeal}`}</h2>
-      
       </div>
 
       <div className="meal-detail-container max-w-4xl mx-auto p-6">
